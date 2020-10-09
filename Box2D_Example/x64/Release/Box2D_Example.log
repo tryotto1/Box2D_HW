@@ -1,58 +1,58 @@
 ﻿  main.cpp
-C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\Box2D_Example\main.cpp(84,17): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\Box2D_Example\main.cpp(84,14): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\Box2D_Example\main.cpp(281,41): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\Box2D_Example\main.cpp(281,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\Box2D_Example\main.cpp(284,40): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\Box2D_Example\main.cpp(284,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(100,17): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(100,14): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(545,41): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(545,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(548,40): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(548,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  0 of 46 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 57 functions ( 1.8%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-Box2D.lib(b2ChainShape.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ChainShape.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2CircleShape.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CircleShape.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2EdgeShape.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2EdgeShape.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2PolygonShape.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PolygonShape.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2BroadPhase.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2BroadPhase.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2CollideCircle.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CollideCircle.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2CollideEdge.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CollideEdge.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2CollidePolygon.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CollidePolygon.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Collision.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Collision.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Distance.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Distance.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2DynamicTree.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2DynamicTree.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2TimeOfImpact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2TimeOfImpact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2BlockAllocator.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2BlockAllocator.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Draw.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Draw.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Math.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Math.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Settings.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Settings.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2StackAllocator.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2StackAllocator.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Timer.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Timer.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2ChainAndCircleContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ChainAndCircleContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2ChainAndPolygonContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ChainAndPolygonContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2CircleContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CircleContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Contact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Contact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2ContactSolver.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ContactSolver.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2EdgeAndCircleContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2EdgeAndCircleContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2EdgeAndPolygonContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2EdgeAndPolygonContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2PolygonAndCircleContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PolygonAndCircleContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2PolygonContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PolygonContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2DistanceJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2DistanceJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2FrictionJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2FrictionJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2GearJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2GearJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Joint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Joint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2MotorJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2MotorJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2MouseJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2MouseJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2PrismaticJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PrismaticJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2PulleyJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PulleyJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2RevoluteJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2RevoluteJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2RopeJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2RopeJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2WeldJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2WeldJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2WheelJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2WheelJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Body.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Body.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2ContactManager.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ContactManager.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Fixture.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Fixture.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2Island.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Island.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2World.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2World.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-Box2D.lib(b2WorldCallbacks.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2WorldCallbacks.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-  Box2D_Example.vcxproj -> C:\Users\tryot\Desktop\3-2\인터렉티브시각화\Box2D_Example\x64\Release\Box2D_Example.exe
+Box2D.lib(b2ChainShape.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ChainShape.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2CircleShape.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CircleShape.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2EdgeShape.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2EdgeShape.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2PolygonShape.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PolygonShape.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2BroadPhase.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2BroadPhase.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2CollideCircle.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CollideCircle.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2CollideEdge.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CollideEdge.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2CollidePolygon.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CollidePolygon.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Collision.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Collision.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Distance.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Distance.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2DynamicTree.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2DynamicTree.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2TimeOfImpact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2TimeOfImpact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2BlockAllocator.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2BlockAllocator.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Draw.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Draw.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Math.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Math.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Settings.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Settings.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2StackAllocator.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2StackAllocator.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Timer.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Timer.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2ChainAndCircleContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ChainAndCircleContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2ChainAndPolygonContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ChainAndPolygonContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2CircleContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2CircleContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Contact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Contact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2ContactSolver.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ContactSolver.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2EdgeAndCircleContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2EdgeAndCircleContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2EdgeAndPolygonContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2EdgeAndPolygonContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2PolygonAndCircleContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PolygonAndCircleContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2PolygonContact.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PolygonContact.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2DistanceJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2DistanceJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2FrictionJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2FrictionJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2GearJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2GearJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Joint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Joint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2MotorJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2MotorJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2MouseJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2MouseJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2PrismaticJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PrismaticJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2PulleyJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2PulleyJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2RevoluteJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2RevoluteJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2RopeJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2RopeJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2WeldJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2WeldJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2WheelJoint.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2WheelJoint.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Body.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Body.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2ContactManager.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2ContactManager.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Fixture.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Fixture.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2Island.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2Island.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2World.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2World.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Box2D.lib(b2WorldCallbacks.obj) : warning LNK4099: 'Box2D.pdb' PDB를 'Box2D.lib(b2WorldCallbacks.obj)' 또는 'C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+  Box2D_Example.vcxproj -> C:\Users\tryot\Desktop\3-2\인터렉티브시각화\project_Box2D\Box2D\x64\Release\Box2D_Example.exe
