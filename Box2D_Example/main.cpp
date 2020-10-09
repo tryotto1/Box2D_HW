@@ -205,39 +205,6 @@ void Render()
 	glPopMatrix();
 
 	glutSwapBuffers();
-
-	/* tmp ground */
-	position = tmp_gnd->GetPosition();
-	angle = tmp_gnd->GetAngle() * 180 / b2_pi;
-
-	glPushMatrix();
-	glTranslatef(position.x, position.y, 0.0f);
-	glRotatef(angle, 0.0f, 0.0f, 1.0f);
-	glColor3f(0.5f, 0.1f, 1.0f);
-
-	glBegin(GL_QUADS);
-	for (int i = 0; i < 4; i++) {
-		glVertex2f(tmp_box.m_vertices[i].x, tmp_box.m_vertices[i].y);
-	}
-	glEnd();
-	glFinish();
-	glPopMatrix();
-
-	position = tmp_gnd2->GetPosition();
-	angle = tmp_gnd2->GetAngle() * 180 / b2_pi;
-
-	glPushMatrix();
-	glTranslatef(position.x, position.y, 0.0f);
-	glRotatef(angle, 0.0f, 0.0f, 1.0f);
-	glColor3f(0.5f, 0.1f, 1.0f);
-
-	glBegin(GL_QUADS);
-	for (int i = 0; i < 4; i++) {
-		glVertex2f(tmp_box2.m_vertices[i].x, tmp_box2.m_vertices[i].y);
-	}
-	glEnd();
-	glFinish();
-	glPopMatrix();
 }
 
 void Update(int value)
