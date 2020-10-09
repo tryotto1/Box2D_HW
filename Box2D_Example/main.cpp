@@ -492,46 +492,6 @@ void Setup()
 		m_prisma = (b2PrismaticJoint*)world->CreateJoint(&jointDef);
 	}
 
-	// 임시 ground
-	{
-		b2Vec2 p1(-5.0f, 15.0f);
-
-		b2BodyDef bd;
-		bd.type = b2_staticBody;
-
-		bd.position = p1;
-		tmp_gnd = world->CreateBody(&bd);
-
-		tmp_box.SetAsBox(20.75f, 0.1f);
-
-		b2FixtureDef fd;
-		fd.shape = &tmp_box;
-		fd.density = 1.0f;
-		fd.friction = 0.0f;
-
-		tmp_gnd->CreateFixture(&fd);
-
-	}
-	// 임시 ground
-	{
-		b2Vec2 p1(-5.0f, 17.0f);
-
-		b2BodyDef bd;
-		bd.type = b2_staticBody;
-
-		bd.position = p1;
-		tmp_gnd2 = world->CreateBody(&bd);
-
-		tmp_box2.SetAsBox(20.75f, 0.1f);
-
-		b2FixtureDef fd;
-		fd.shape = &tmp_box2;
-		fd.density = 1.0f;
-		fd.friction = 0.0f;
-
-		tmp_gnd2->CreateFixture(&fd);
-
-	}
 }
 
 void DokeyBoard (unsigned char key, int x, int y) 
