@@ -1,25 +1,25 @@
 ﻿  main.cpp
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(181,11): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(295,17): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(295,14): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(395,18): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(395,15): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(467,17): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(467,14): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(488,17): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(488,14): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(542,23): warning C4805: '==': 연산에 'int' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(552,24): warning C4805: '==': 연산에 'int' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1022,41): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1022,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1025,40): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1025,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1048,41): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1048,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1051,40): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1051,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(195,11): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(347,17): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(347,14): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(447,18): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(447,15): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(534,17): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(534,14): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(555,17): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(555,14): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(672,23): warning C4805: '==': 연산에 'int' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(682,24): warning C4805: '==': 연산에 'int' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1326,41): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1326,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1329,40): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1329,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1352,41): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1352,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1355,40): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\tryot\Desktop\인터렉티브시각화\project_Box2D\Box2D\Box2D_Example\main.cpp(1355,31): warning C4244: '인수': 'int'에서 'float32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  1 of 307 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  1 of 326 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
