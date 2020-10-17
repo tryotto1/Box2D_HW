@@ -5,10 +5,11 @@
 #include <math.h>
 #include <set>
 #include <vector>
+#include <tuple>
 #include "GL/freeglut.h"
 #include "Box2D/Box2D.h"
 
-#define num_gnd_vertex 32
+#define num_gnd_vertex 34
 
 // Window screen size
 int scr_width = 640;
@@ -20,6 +21,7 @@ b2Body* ground;
 b2Body* ground_2;
 b2Body* ground_3;
 b2Body* ground_4;
+b2Body* ground_5;
 b2Body* box;
 b2Body* pin_ball;
 b2Body* leftFlipper;
@@ -36,13 +38,15 @@ b2Body* obs_ball[10];
 b2Body* obs_box;
 b2Body* obs_box_2;
 b2Body* obs_float;
-b2Body* water;	
+b2Body* water;
 b2Body* obs_dist1;
 b2Body* obs_dist2;
 b2Body* obs_hole;
 b2Body* obs_whitehole;
 b2Body* obs_large;
 b2Body* obs_small;
+b2Body* obs_color;
+b2Body* obs_color_2;
 b2RevoluteJoint* m_leftJoint;	// Flipper 설정
 b2RevoluteJoint* m_rightJoint;
 b2RevoluteJoint* m_ball_shooter;	// 발사대 설정
@@ -56,11 +60,14 @@ b2ChainShape gnd_shape;
 b2ChainShape gnd_shape_2;
 b2ChainShape gnd_shape_3;
 b2ChainShape gnd_shape_4;
+b2ChainShape gnd_shape_5;
 b2CircleShape ballshape;
 b2CircleShape obs_ball_shape;
 b2CircleShape obs_hole_shape;
 b2CircleShape obs_whitehole_shape;
 
+b2PolygonShape obs_color_shape;
+b2PolygonShape obs_color2_shape;
 b2PolygonShape obs_float_shape;
 b2PolygonShape obs_box_shape;
 b2PolygonShape obs_box_shape_2;
@@ -83,22 +90,85 @@ float32 timeStep = 1.0f / g_hz;
 // keyboard flag 변수
 int flag_flip = false;
 int flag_shoot = true;
+int flag_color = false;
+int flag_ball_color = false;
 
 // gravity 설정
 b2Vec2 gravity;
 
 using namespace std;
 typedef pair<b2Fixture*, b2Fixture*> fixturePair;
+typedef tuple<b2Fixture*, b2Fixture*, float, float> fixtureTuple;
 int m_button = true;
 
-/* contact listener - 부력 용도 */
-class b2ContactListener_ : public b2ContactListener 
+///* contact listener - 부력 용도 */
+//class b2ContactListener_2 : public b2ContactListener
+//{
+//public:
+//	set<fixtureTuple> m_fixtureTuples;
+//	b2ContactListener_2() {};
+//
+//	void BeginContact(b2Contact* contact)
+//	{
+//		b2Fixture* fixtureA = contact->GetFixtureA();
+//		b2Fixture* fixtureB = contact->GetFixtureB();
+//		b2WorldManifold waterManifold;
+//		contact->GetWorldManifold(&waterManifold);
+//		waterManifold.normal.Normalize();
+//
+//		// 부력
+//		if (fixtureA->GetBody() == water || fixtureB->GetBody() == water)
+//		{
+//			if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody)
+//			{
+//				m_fixtureTuples.insert(make_tuple(fixtureB, fixtureA,
+//					waterManifold.normal.x, waterManifold.normal.y));
+//			}
+//			else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody)
+//			{
+//				m_fixtureTuples.insert(make_tuple(fixtureA, fixtureB,
+//					waterManifold.normal.x, waterManifold.normal.y));
+//			}
+//		}
+//
+//	}
+//
+//	void EndContact(b2Contact* contact)
+//	{
+//		b2Fixture* fixtureA = contact->GetFixtureA();
+//		b2Fixture* fixtureB = contact->GetFixtureB();
+//		b2WorldManifold waterManifold;
+//		contact->GetWorldManifold(&waterManifold);
+//		waterManifold.normal.Normalize();
+//
+//		// 부력
+//		if (fixtureA->GetBody() == water || fixtureB->GetBody() == water)
+//		{
+//			if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody)
+//			{
+//				m_fixtureTuples.erase(make_tuple(fixtureB, fixtureA,
+//					waterManifold.normal.x, waterManifold.normal.y));
+//			}
+//			else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody)
+//			{
+//				m_fixtureTuples.erase(make_tuple(fixtureA, fixtureB,
+//					waterManifold.normal.x, waterManifold.normal.y));
+//
+//			}
+//		}
+//
+//	}
+//
+//};
+
+/* contact listener - 일반 장애물 용도 */
+class b2ContactListener_ : public b2ContactListener
 {
-public : 
+public:
 	set<fixturePair> m_fixturePairs;
 	b2ContactListener_() {};
 
-	void BeginContact(b2Contact * contact){
+	void BeginContact(b2Contact* contact) {
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
 
@@ -123,8 +193,10 @@ public :
 	}
 };
 
+
 // contact Listener 설정 - 부력 용도
 b2ContactListener_ contactListener;
+//b2ContactListener_2 water_contactListener;
 
 /* 부력 용도 여러 함수 정리 */
 bool inside(b2Vec2 cp1, b2Vec2 cp2, b2Vec2 p) {
@@ -164,7 +236,7 @@ b2Vec2 ComputeCentroid(vector<b2Vec2> vs, float& area) {
 	return c;
 }
 
-void applybuoyancy(b2Fixture* box, b2Fixture* water, float area, 
+void applybuoyancy(b2Fixture* box, b2Fixture* water, float area,
 	b2Vec2 gravity, b2Vec2	centroid) {
 	float displaceMass = water->GetDensity() * area;
 	b2Vec2 buoyancyForce = displaceMass * -1 * gravity;
@@ -177,7 +249,7 @@ void applydrag(b2Fixture* box, b2Fixture* water, float area, b2Vec2 centroid)
 		water->GetBody()->GetLinearVelocityFromWorldPoint(centroid);
 
 	float vel = velDir.Normalize();
-	
+
 	float dragMag = water->GetDensity() * vel * vel / 2;
 	b2Vec2 dragForce = dragMag * -velDir;
 	box->GetBody()->ApplyForce(dragForce, centroid, true);
@@ -211,7 +283,7 @@ bool findIntersectionOfFixtures(b2Fixture* fA, b2Fixture* fB, vector<b2Vec2>& ou
 	vector<b2Vec2> clipPolygon;
 	for (int i = 0; i < polyA->GetVertexCount(); i++)
 		clipPolygon.push_back(fB->GetBody()->GetWorldPoint(polyB->GetVertex(i)));
-	
+
 	b2Vec2 cp1 = clipPolygon[clipPolygon.size() - 1];
 	for (int j = 0; j < clipPolygon.size(); j++) {
 		b2Vec2 cp2 = clipPolygon[j];
@@ -245,7 +317,8 @@ bool findIntersectionOfFixtures(b2Fixture* fA, b2Fixture* fB, vector<b2Vec2>& ou
 void Render()
 {
 	// (1) Initialize glut - 기본 꼴. 수정할 필요 전혀 없음
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	if (flag_color == false)
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
@@ -255,21 +328,21 @@ void Render()
 
 	gluOrtho2D(-25.0f, 25.0f, -5.0f, 55.0f);
 
-	/* (2) 맵 그리기 */ 
+	/* (2) 맵 그리기 */
 	b2Vec2 position = ground->GetPosition();
 	float32 angle = ground->GetAngle();
 
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glTranslatef(position.x, position.y, 0.0f);
-	glRotatef(angle, 0.0f, 0.0f, 1.0f);			
-	glColor3f(0.1f, 0.1f, 0.1f);			   
+	glRotatef(angle, 0.0f, 0.0f, 1.0f);
+	glColor3f(0.1f, 0.1f, 0.1f);
 
 	glLineWidth(1.0f);
-	glBegin(GL_LINE_LOOP);	
-	for(int i=0;i< num_gnd_vertex;i++)
+	glBegin(GL_LINE_LOOP);
+	for (int i = 0; i < num_gnd_vertex; i++)
 		glVertex2d(gnd_shape.m_vertices[i].x, gnd_shape.m_vertices[i].y);
-	
+
 	glEnd();
 	glPopMatrix();
 
@@ -309,6 +382,24 @@ void Render()
 	glEnd();
 	glPopMatrix();
 
+	// 맵 왼쪽 구멍 만들기
+	position = ground_5->GetPosition();
+	angle = ground_5->GetAngle();
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glTranslatef(position.x, position.y, 0.0f);
+	glRotatef(angle, 0.0f, 0.0f, 1.0f);
+	glColor3f(0.1f, 0.1f, 0.1f);
+
+	glLineWidth(1.0f);
+	glBegin(GL_LINE_LOOP);
+	for (int i = 0; i < 8; i++)
+		glVertex2d(gnd_shape_5.m_vertices[i].x, gnd_shape_5.m_vertices[i].y);
+
+	glEnd();
+	glPopMatrix();
+
 	// 맵 아랫 구멍 만들기
 	position = ground_2->GetPosition();
 	angle = ground_2->GetAngle();
@@ -327,15 +418,20 @@ void Render()
 	glEnd();
 	glPopMatrix();
 
-	/* (3) 핀볼 그리기 */ 
+	/* (3) 핀볼 그리기 */
 	position = pin_ball->GetPosition();
 	angle = pin_ball->GetAngle();
 
 	glPushMatrix();
-	glTranslatef(position.x, position.y, 0.0f);	
-	glRotatef(angle, 0.0f, 0.0f, 1.0f);			
-	glColor3f(0.9f, 0.1f, 0.9f);
-		
+	glTranslatef(position.x, position.y, 0.0f);
+	glRotatef(angle, 0.0f, 0.0f, 1.0f);
+
+	if (flag_ball_color == false)
+		glColor3f(0.9f, 0.1f, 0.9f);
+	else
+		glColor3f(0.9f, 0.9f, 0.9f);
+
+
 	double rad = ballshape.m_radius;
 
 	glBegin(GL_POLYGON);
@@ -367,7 +463,7 @@ void Render()
 
 	/* (5) flipper 그리기 - 오른쪽 */
 	position = rightFlipper->GetPosition();
-	angle = rightFlipper->GetAngle() * 180/b2_pi;
+	angle = rightFlipper->GetAngle() * 180 / b2_pi;
 
 	glPushMatrix();
 	glTranslatef(position.x, position.y, 0.0f);
@@ -416,7 +512,7 @@ void Render()
 	/* (7) prismatic 장애물 그리기 */
 	position = prisma_1->GetPosition();
 	angle = prisma_1->GetAngle() * 180 / b2_pi;
-	
+
 	glPushMatrix();
 	glTranslatef(position.x, position.y, 0.0f);
 	glRotatef(angle, 0.0f, 0.0f, 1.0f);
@@ -437,7 +533,7 @@ void Render()
 		glColor3f(0.6f, 0.4f, 0.1f);
 
 		double rad = obs_ball_shape.m_radius;
-		
+
 		glBegin(GL_POLYGON);
 		for (int i = 0; i < 360; i++)
 		{
@@ -447,7 +543,7 @@ void Render()
 			glVertex2f(x, y);
 		}
 		glEnd();
-		glPopMatrix();		
+		glPopMatrix();
 	}
 
 	/* (9) 마름모 부스터 장애물 그리기 */
@@ -497,7 +593,7 @@ void Render()
 	glEnd();
 	glPopMatrix();
 
-	
+
 	/* (12) 발사대 그리기 */
 	position = prisma_shoot->GetPosition();
 	angle = prisma_shoot->GetAngle() * 180 / b2_pi;
@@ -535,7 +631,7 @@ void Render()
 	}
 	glEnd();
 	glPopMatrix();
-	
+
 	/* (14) 화이트홀 그리기 */
 	float white_x = 3.0f, white_y = 5.0f;
 
@@ -572,7 +668,7 @@ void Render()
 	}
 	glEnd();
 	glPopMatrix();
-	
+
 	/* (16) 확대 축소 장애물 그리기 */
 	position = obs_large->GetPosition();
 	angle = obs_large->GetAngle() * 180 / b2_pi;
@@ -604,21 +700,52 @@ void Render()
 	glEnd();
 	glPopMatrix();
 
+	/* (17) 색깔 변경 장애물 그리기 */
+	position = obs_color->GetPosition();
+	angle = obs_color->GetAngle() * 180 / b2_pi;
+
+	glPushMatrix();
+	glTranslatef(position.x, position.y, 0.0f);
+	glRotatef(angle, 0.0f, 0.0f, 1.0f);
+	glColor3f(0.9f, 0.4f, 0.4f);
+
+	glBegin(GL_QUADS);
+	for (int i = 0; i < 4; i++) {
+		glVertex2f(obs_color_shape.m_vertices[i].x, obs_color_shape.m_vertices[i].y);
+	}
+	glEnd();
+	glPopMatrix();
+
+	position = obs_color_2->GetPosition();
+	angle = obs_color_2->GetAngle() * 180 / b2_pi;
+
+	glPushMatrix();
+	glTranslatef(position.x, position.y, 0.0f);
+	glRotatef(angle, 0.0f, 0.0f, 1.0f);
+	glColor3f(0.5f, 0.5f, 0.9f);
+
+	glBegin(GL_QUADS);
+	for (int i = 0; i < 4; i++) {
+		glVertex2f(obs_color2_shape.m_vertices[i].x, obs_color2_shape.m_vertices[i].y);
+	}
+	glEnd();
+	glPopMatrix();
+
 
 	/* 최종 openGL 코드 */
 	glutSwapBuffers();
 }
 
 void Update(int value)
-{	
+{
 	// update the simulation
 	world->Step(timeStep, velocityIterations, positionIterations);
-	
+
 	// contact listener - 부력 관련 부분
 	if (contactListener.m_fixturePairs.size() > 0) {
 		set<fixturePair>::iterator it = contactListener.m_fixturePairs.begin();
 		set<fixturePair>::iterator end = contactListener.m_fixturePairs.end();
-		
+
 		while (it != end) {
 			b2Fixture* fixture_one = it->first;
 			b2Fixture* fixture_two = it->second;
@@ -628,7 +755,7 @@ void Update(int value)
 			vector<b2Vec2> intersectionPoints;
 
 			// 블랙홀인지 확인하기 위함
-			if ((fixture_one->GetBody() == obs_hole)||(fixture_two->GetBody() == obs_hole)) {
+			if ((fixture_one->GetBody() == obs_hole) || (fixture_two->GetBody() == obs_hole)) {
 				b2Vec2 white_pos(5.0f, 10.0f);
 				pin_ball->SetTransform(white_pos, pin_ball->GetAngle());
 				pin_ball->ApplyForce(b2Vec2(0.0f, -5000.0f), pin_ball->GetWorldCenter(), true);
@@ -652,9 +779,22 @@ void Update(int value)
 				ballshape.m_radius = 0.2f;
 			}
 
+			// 색깔 변경하기 - 흰색
+			if ((fixture_one->GetBody() == obs_color) || (fixture_two->GetBody() == obs_color)) {
+				glClearColor(0.0f, 0.5f, 0.5f, 0.8f);
+				flag_ball_color = true;
+				flag_color = true;
+			}
+
+			// 색깔 변경하기 - 핑크색
+			if ((fixture_one->GetBody() == obs_color_2) || (fixture_two->GetBody() == obs_color_2)) {
+				glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+				flag_ball_color = false;
+			}
+
 			// 부력 관련 코드임
 			if (findIntersectionOfFixtures(fixture_one, fixture_two, intersectionPoints)) {
-				
+
 				float area = 10;
 				b2Vec2 centroid = ComputeCentroid(intersectionPoints, area);
 
@@ -667,7 +807,113 @@ void Update(int value)
 			++it;
 		}
 	}
-	
+
+	//// 부력 관련 contact listner
+	//if (water_contactListener.m_fixtureTuples.size() > 0)
+	//{
+	//	set<fixtureTuple>::iterator it = water_contactListener.m_fixtureTuples.begin();
+	//	set<fixtureTuple>::iterator end = water_contactListener.m_fixtureTuples.end();
+
+	//	while (it != end) {
+	//		b2Fixture* fixture_A = get<0>(*it);
+	//		b2Fixture* fixture_B = get<1>(*it);
+
+	//		// 부력 적용하는 경우에 해당하는지
+	//		if (fixture_B->GetBody() == water)
+	//		{
+	//			// 접촉점 노멀벡터
+	//			b2Vec2 Mani_BallnWater;
+	//			Mani_BallnWater.x = get<2>(*it);
+	//			Mani_BallnWater.y = get<3>(*it);
+
+	//			// raycast input
+	//			b2RayCastInput input;
+	//			float rayLength = ballshape.m_radius; // 기준을 공 반지름만큼
+
+	//			input.p1 = pin_ball->GetPosition(); // 공의 중심 좌표
+
+	//			// 공이 절반보다 덜 잠겨있는지 확인
+	//			input.p2 = input.p1 + rayLength * (-1.0f) * Mani_BallnWater;
+	//			input.maxFraction = 20.0f; // 충분히 닿을만큼
+
+	//			b2RayCastOutput output;
+
+	//			// ray 교차점
+	//			b2Vec2 intersectionPoint;
+	//			// 면적, 부력 작용점 계산
+
+	//			float area = 0.0f;
+	//			b2Vec2 centroid;
+
+	//			// 부딪힐 경우
+	//			if (fixture_B->RayCast(&output, input, 0))
+	//			{
+	//				printf("Here\n");
+	//				float origin_area = pow(ballshape.m_radius, 2) * b2_pi; // 원 전체 넓이
+
+	//				if (output.fraction <= 1.0f)  // 절반 이하로 잠겼을 경우
+	//				{
+	//					printf("A\n");
+	//					// ray 교점
+	//					intersectionPoint = input.p1 + output.fraction * (input.p2 - input.p1);
+	//					float dist = b2Distance(intersectionPoint, input.p1);
+	//					double cos = dist / ballshape.m_radius; // cos(세타/2)
+	//					double angle = 2.0f * acos(cos); // 라디안값
+	//					// 넓이 = 부채꼴 - 삼각형
+	//					area = (pow(ballshape.m_radius, 2) * angle * 0.5f) - (pow(ballshape.m_radius, 2) * sin(angle) * 0.5f);
+	//					// 작용점 계산
+	//					centroid = input.p1 + 4.0f * pow(sin(angle * 0.5f), 3) / (3.0f * (angle - sin(angle))) * (input.p2 - input.p1);
+
+	//				}
+	//			}
+	//			// 안에 들어와있는지 점검
+	//			else
+	//			{
+	//				printf("여긴가\n");
+	//				// 안 잠겼거나, 절반 이상 잠겼을 경우
+	//				input.p1 = input.p1 + rayLength * 1.0f * Mani_BallnWater; // 노멀 따라서 원위의 점으로
+	//				input.p2 = pin_ball->GetPosition();
+	//				if (fixture_B->RayCast(&output, input, 0))
+	//				{
+	//					printf("B\n");
+	//					//절반 보다는 더 잠겼으나, 완전히 덜 잠겼을 경우
+	//					float new_fraction = 1 - output.fraction;
+	//					if (new_fraction <= 1.0f)
+	//					{
+	//						// ray 교점
+	//						intersectionPoint = input.p1 + output.fraction * (input.p2 - input.p1);
+	//						float dist = b2Distance(intersectionPoint, input.p1);
+	//						double cos = dist / ballshape.m_radius; // cos(세타/2)
+	//						double angle = 2.0f * acos(cos); // 라디안값
+	//						// 넓이 = 부채꼴 + 삼각형
+	//						area = (pow(ballshape.m_radius, 2) * (2.0f * b2_pi - angle) * 0.5f) + (pow(ballshape.m_radius, 2) * sin(angle) * 0.5f);
+	//						// 작용점 계산
+	//						centroid = input.p1 + 4.0f * pow(sin(angle * 0.5f), 3) / (3.0f * (angle - sin(angle))) * (input.p1 - input.p2);
+
+	//					}
+	//				}
+	//				// 완전히 잠겼을 경우
+	//				else
+	//				{
+	//					printf("C\n");
+	//					area = pow(ballshape.m_radius, 2) * b2_pi;
+	//					centroid = pin_ball->GetPosition();
+	//				}
+	//			}
+
+	//			printf("area: %f\n", area);
+
+	//			// 부력적용
+	//			applybuoyancy(fixture_A, fixture_B, area, gravity, centroid);
+
+	//			// drag force 적용
+	//			applydrag(fixture_A, fixture_B, area, centroid);
+	//		}
+	//		++it;
+	//	}
+	//}
+
+
 	// 키보드 컨트롤 부분 - flipper
 	if (flag_flip == true) {
 		m_leftJoint->SetMotorSpeed(40.0f);
@@ -716,24 +962,28 @@ void Setup()
 	// world 설정
 	world = new b2World(gravity);
 	world->SetContactListener(&contactListener);
+	//world->SetContactListener(&water_contactListener);
+
 	// 맵 설정
 	{
 		// step1 : define body - 위치 설정
 		b2BodyDef gnd_bd;
-		
+
 		// step2 : create body
 		b2Body* _ground = world->CreateBody(&gnd_bd);
-				
+
 		// step3 : create shape		
 		b2Vec2 vs[num_gnd_vertex];
 		int idx = 0;
+
 		// 발사대 부분
 		vs[idx++].Set(-22.0f, -4.0f);
-		vs[idx++].Set(-22.0f, 50.0f);		
+		vs[idx++].Set(-22.0f, 47.0f);
+		vs[idx++].Set(-21.0f, 50.0f);
 
 		// 몸통 부분
 		vs[idx++].Set(-7.0f, 33.0f);
-		vs[idx++].Set(-5.0f, 35.0f);		
+		vs[idx++].Set(-5.0f, 35.0f);
 		vs[idx++].Set(-2.0f, 37.0f);
 		vs[idx++].Set(1.0f, 38.0f);
 		vs[idx++].Set(5.0f, 38.0f);
@@ -744,13 +994,7 @@ void Setup()
 		vs[idx++].Set(17.0f, 25.0f);
 		vs[idx++].Set(17.0f, 23.0f);
 		vs[idx++].Set(17.0f, 20.0f);//new end
-		vs[idx++].Set(15.0f, 15.0f);		
-
-		/*
-		vs[idx++].Set(10.0f, 25.0f);
-		vs[idx++].Set(10.0f, 20.0f);
-		*/
-		
+		vs[idx++].Set(15.0f, 15.0f);
 
 		// 수영장 부분
 		vs[idx++].Set(5.0f, 2.0f);	// flipper 필요
@@ -765,13 +1009,14 @@ void Setup()
 
 		// 몸통 부분
 		vs[idx++].Set(-10.0f, 15.0f);
-		vs[idx++].Set(-5.0f, 20.0f);
-		vs[idx++].Set(-5.0f, 25.0f);
+		vs[idx++].Set(-12.0f, 20.0f);	// new start
+		vs[idx++].Set(-12.0f, 25.0f);	// new end
 		vs[idx++].Set(-10.0f, 30.0f);
 		vs[idx++].Set(-8.0f, 32.0f);
 
 		// 발사대 부분
-		vs[idx++].Set(-20.0f, 45.0f);
+		vs[idx++].Set(-18.0f, 43.0f);
+		vs[idx++].Set(-20.0f, 42.5f);
 		vs[idx++].Set(-20.0f, -4.0f);
 		vs[idx++].Set(-22.0f, -4.0f);
 		gnd_shape.CreateLoop(vs, num_gnd_vertex);
@@ -782,7 +1027,7 @@ void Setup()
 		fd.density = 0.5f;
 
 		// step5 : attach shape to body with fixture
-		_ground->CreateFixture(&fd);		
+		_ground->CreateFixture(&fd);
 		ground = _ground;
 	}
 
@@ -853,6 +1098,40 @@ void Setup()
 		ground_4 = _ground;
 	}
 
+	// 맵 왼쪽 구멍 설정
+	{
+		// step1 : define body - 위치 설정
+		b2BodyDef gnd_bd;
+
+		// step2 : create body
+		b2Body* _ground = world->CreateBody(&gnd_bd);
+
+		// step3 : create shape				
+		b2Vec2 vs[8];
+		int idx = 0;
+
+		vs[idx++].Set(-5.0f, 25.0f);
+		vs[idx++].Set(-5.0f, 20.0f);
+		vs[idx++].Set(-6.0f, 19.0f);
+		vs[idx++].Set(-8.0f, 20.0f);
+		vs[idx++].Set(-9.0f, 22.0f);
+		vs[idx++].Set(-9.0f, 25.0f);
+		vs[idx++].Set(-8.5f, 27.0f);
+		vs[idx++].Set(-8.0f, 28.0f);
+
+		gnd_shape_5.CreateLoop(vs, idx);
+
+		// step4 : create fixture - 기타 설정
+		b2FixtureDef fd;
+		fd.shape = &gnd_shape_5;
+		fd.density = 0.5f;
+
+		// step5 : attach shape to body with fixture
+		_ground->CreateFixture(&fd);
+		ground_5 = _ground;
+	}
+
+
 	// 맵 아래 구멍 설정
 	{
 		// step1 : define body - 위치 설정
@@ -864,11 +1143,11 @@ void Setup()
 		// step3 : create shape		
 		b2Vec2 vs[3];
 		int idx = 0;
-		
+
 		vs[idx++].Set(-3.0f, 15.0f);
 		vs[idx++].Set(9.0f, 15.0f);
 		vs[idx++].Set(3.0f, 8.0f);
-		
+
 		gnd_shape_2.CreateLoop(vs, 3);
 
 		// step4 : create fixture - 기타 설정
@@ -888,9 +1167,9 @@ void Setup()
 		b2Vec2 p1(1.0f, 2.0f), p2(5.0f, 2.0f);
 
 		// step2 : create body - 각 flipper별로 만들기
-		b2BodyDef bd;		
+		b2BodyDef bd;
 		bd.type = b2_dynamicBody;
-		
+
 		bd.position = p1;
 		leftFlipper = world->CreateBody(&bd);
 
@@ -909,7 +1188,7 @@ void Setup()
 		leftFlipper->CreateFixture(&fd);
 		rightFlipper->CreateFixture(&fd);
 
-		/* flipper를 ground에 고정시키기 위한 과정*/		
+		/* flipper를 ground에 고정시키기 위한 과정*/
 		// body A - the underneath object (=ground)
 		b2RevoluteJointDef jd;
 		jd.bodyA = ground;
@@ -933,6 +1212,60 @@ void Setup()
 		jd.upperAngle = 30.0f * b2_pi / 180.0f;
 		m_rightJoint = (b2RevoluteJoint*)world->CreateJoint(&jd);
 	}
+
+
+	// 배경 검은색 장애물
+	{
+		// Step1 : define body - 위치 설정 따로 안함 (Render에서 설정하기)
+		b2BodyDef box;
+		box.type = b2_staticBody;
+
+		b2Vec2 p1(-9.0f, 17.5f);
+		box.position = p1;
+
+		// Step2 : create body
+		b2Body* body = world->CreateBody(&box);
+
+		// Step3 : crate shape - 길이
+		obs_color_shape.SetAsBox(1.0f, 1.0f);
+
+		// Step4 : create Fixture - 기타 속성
+		b2FixtureDef obs_boxfd;
+		obs_boxfd.shape = &obs_color_shape;
+		obs_boxfd.density = 1.0f;		// 밀도		
+		obs_boxfd.isSensor = true;
+
+		// Step5 : Attach shape to body with fixture
+		body->CreateFixture(&obs_boxfd);
+		obs_color = body;
+	}
+
+	// 배경 흰색 장애물
+	{
+		// Step1 : define body - 위치 설정 따로 안함 (Render에서 설정하기)
+		b2BodyDef box;
+		box.type = b2_staticBody;
+
+		b2Vec2 p1(-4.0f, 17.5f);
+		box.position = p1;
+
+		// Step2 : create body
+		b2Body* body = world->CreateBody(&box);
+
+		// Step3 : crate shape - 길이
+		obs_color2_shape.SetAsBox(1.0f, 1.0f);
+
+		// Step4 : create Fixture - 기타 속성
+		b2FixtureDef obs_boxfd;
+		obs_boxfd.shape = &obs_color2_shape;
+		obs_boxfd.density = 1.0f;		// 밀도		
+		obs_boxfd.isSensor = true;
+
+		// Step5 : Attach shape to body with fixture
+		body->CreateFixture(&obs_boxfd);
+		obs_color_2 = body;
+	}
+
 
 	// 바람개비 장애물
 	{
@@ -965,7 +1298,7 @@ void Setup()
 		// Step5 : Attach shape to body with fixture
 		scissor_1->CreateFixture(&fd);
 		scissor_2->CreateFixture(&fd2);
-		
+
 		/* flipper를 ground에 고정시키기 위한 과정*/
 		// body A - the underneath object (=ground)
 		b2RevoluteJointDef jd;
@@ -973,7 +1306,7 @@ void Setup()
 		jd.localAnchorB.SetZero();
 		jd.enableMotor = true;
 		jd.maxMotorTorque = 1000.0f;
-		
+
 		// body B - the overhead object (=scissor)
 		jd.motorSpeed = 30.0f;
 		jd.localAnchorA = p1;
@@ -1017,23 +1350,23 @@ void Setup()
 		ballfd.restitution = 0.5f;	// 반발력
 
 		// Step5 : Attach shape to body with fixture
-		body->CreateFixture(&ballfd);		
+		body->CreateFixture(&ballfd);
 		pin_ball = body;
 	}
 
 	// 작은 공 장애물
 	{
 		float ball_offset_y = 18.0f, ball_offset_x = 3.0f;
-		
-		float tmp_x[10] = { ball_offset_x - 1.0f, ball_offset_x + 0.0f, 
-			ball_offset_x  + 1.0f, ball_offset_x  - 0.5f, 
-			ball_offset_x  + 0.5f, ball_offset_x  - 0.5f, 
-			ball_offset_x  + 0.5f , ball_offset_x -1.0f, 
-			ball_offset_x  + 0.0f, ball_offset_x  + 1.0f };
-		float tmp_y[10] = { ball_offset_y + 9.0f, ball_offset_y + 9.0f , 
-			ball_offset_y + 9.0f , ball_offset_y + 8.0f , 
+
+		float tmp_x[10] = { ball_offset_x - 1.0f, ball_offset_x + 0.0f,
+			ball_offset_x + 1.0f, ball_offset_x - 0.5f,
+			ball_offset_x + 0.5f, ball_offset_x - 0.5f,
+			ball_offset_x + 0.5f , ball_offset_x - 1.0f,
+			ball_offset_x + 0.0f, ball_offset_x + 1.0f };
+		float tmp_y[10] = { ball_offset_y + 9.0f, ball_offset_y + 9.0f ,
+			ball_offset_y + 9.0f , ball_offset_y + 8.0f ,
 			ball_offset_y + 8.0f , ball_offset_y + 7.0f ,
-			ball_offset_y + 7.0f , ball_offset_y + 6.0f , 
+			ball_offset_y + 7.0f , ball_offset_y + 6.0f ,
 			ball_offset_y + 6.0f, ball_offset_y + 6.0f };
 
 		for (int i = 0; i < 10; i++) {
@@ -1120,7 +1453,7 @@ void Setup()
 
 		b2Vec2 p1(-1.0f, 8.0f);
 		box.position = p1;
-	
+
 		// Step2 : create body
 		b2Body* body = world->CreateBody(&box);
 
@@ -1178,14 +1511,14 @@ void Setup()
 		b2FixtureDef obs_float_boxfd;
 		obs_float_boxfd.shape = &obs_float_shape;
 		obs_float_boxfd.density = 1.0f;		// 밀도		
-		
+
 		// Step5 : Attach shape to body with fixture
 		body->CreateFixture(&obs_float_boxfd);
 		obs_float = body;
 	}
 
 	// 와리가리 - prismatic 이용 장애물 
-	{	
+	{
 		/* 기본적인 설정 부분 */
 		// step1 : define body - 위치 설정
 		// step2 : create body 
@@ -1271,7 +1604,7 @@ void Setup()
 
 		// step2
 		b2Body* body_water = world->CreateBody(&boxbd_water);
-		
+
 		// step3
 		water_shape.SetAsBox(12.4f, 1.0f);
 
@@ -1287,7 +1620,7 @@ void Setup()
 		body_water->CreateFixture(&boxfd_water);
 		water = body_water;
 	}
-	
+
 	// 블랙홀
 	{
 		// Step1 : define body - 위치
@@ -1329,7 +1662,7 @@ void DoReleaseKey(unsigned char key, int x, int y) {
 		pin_ball->ApplyForce(b2Vec2(x_force, -y_force), pin_ball->GetWorldCenter(), true);
 		break;
 	case 'a':
-		flag_flip = false;	
+		flag_flip = false;
 		break;
 	case 'b':
 		flag_shoot = false;
@@ -1341,7 +1674,7 @@ void DoReleaseKey(unsigned char key, int x, int y) {
 }
 
 /* 키보드 입력 했을때 호출 */
-void DokeyBoard (unsigned char key, int x, int y) 
+void DokeyBoard(unsigned char key, int x, int y)
 {
 	int x_force = 20000;
 	int y_force = 20000;
@@ -1375,7 +1708,7 @@ int main(int argc, char** argv)
 
 	// Setting Box2D elements
 	Setup();
-	
+
 	glutDisplayFunc(Render);		//If you want to render, Use it.
 	glutReshapeFunc(Reshape);		//Reshape by window size
 	glutTimerFunc(20, Update, 0);	//Update physics simulation
