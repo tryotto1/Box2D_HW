@@ -98,105 +98,91 @@ b2Vec2 gravity;
 
 using namespace std;
 typedef pair<b2Fixture*, b2Fixture*> fixturePair;
-typedef tuple<b2Fixture*, b2Fixture*, float, float> fixtureTuple;
+typedef pair<pair<b2Fixture*, b2Fixture*>, pair<float, float>> fixtureTuple;
 int m_button = true;
-
-///* contact listener - 부력 용도 */
-//class b2ContactListener_2 : public b2ContactListener
-//{
-//public:
-//	set<fixtureTuple> m_fixtureTuples;
-//	b2ContactListener_2() {};
-//
-//	void BeginContact(b2Contact* contact)
-//	{
-//		b2Fixture* fixtureA = contact->GetFixtureA();
-//		b2Fixture* fixtureB = contact->GetFixtureB();
-//		b2WorldManifold waterManifold;
-//		contact->GetWorldManifold(&waterManifold);
-//		waterManifold.normal.Normalize();
-//
-//		// 부력
-//		if (fixtureA->GetBody() == water || fixtureB->GetBody() == water)
-//		{
-//			if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody)
-//			{
-//				m_fixtureTuples.insert(make_tuple(fixtureB, fixtureA,
-//					waterManifold.normal.x, waterManifold.normal.y));
-//			}
-//			else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody)
-//			{
-//				m_fixtureTuples.insert(make_tuple(fixtureA, fixtureB,
-//					waterManifold.normal.x, waterManifold.normal.y));
-//			}
-//		}
-//
-//	}
-//
-//	void EndContact(b2Contact* contact)
-//	{
-//		b2Fixture* fixtureA = contact->GetFixtureA();
-//		b2Fixture* fixtureB = contact->GetFixtureB();
-//		b2WorldManifold waterManifold;
-//		contact->GetWorldManifold(&waterManifold);
-//		waterManifold.normal.Normalize();
-//
-//		// 부력
-//		if (fixtureA->GetBody() == water || fixtureB->GetBody() == water)
-//		{
-//			if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody)
-//			{
-//				m_fixtureTuples.erase(make_tuple(fixtureB, fixtureA,
-//					waterManifold.normal.x, waterManifold.normal.y));
-//			}
-//			else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody)
-//			{
-//				m_fixtureTuples.erase(make_tuple(fixtureA, fixtureB,
-//					waterManifold.normal.x, waterManifold.normal.y));
-//
-//			}
-//		}
-//
-//	}
-//
-//};
 
 /* contact listener - 일반 장애물 용도 */
 class b2ContactListener_ : public b2ContactListener
 {
 public:
 	set<fixturePair> m_fixturePairs;
+	set<fixtureTuple> m_fixtureTuples;
+
 	b2ContactListener_() {};
 
 	void BeginContact(b2Contact* contact) {
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
 
-		if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody) {
-			m_fixturePairs.insert(make_pair(fixtureB, fixtureA));
+		b2WorldManifold waterManifold;
+		contact->GetWorldManifold(&waterManifold);
+		waterManifold.normal.Normalize();
+
+		// 부력
+		if (fixtureA->GetBody() == water || fixtureB->GetBody() == water)
+		{
+			if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody)
+			{
+				m_fixtureTuples.insert(make_pair(make_pair(fixtureB, fixtureA),
+					make_pair(waterManifold.normal.x, waterManifold.normal.y)));
+			}
+			else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody)
+			{
+				m_fixtureTuples.insert(make_pair(make_pair(fixtureA, fixtureB),
+					make_pair(waterManifold.normal.x, waterManifold.normal.y)));
+			}
 		}
-		else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody) {
-			m_fixturePairs.insert(make_pair(fixtureA, fixtureB));
-		}
+		// 장애물
+		else {
+			if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody) {
+				m_fixturePairs.insert(make_pair(fixtureB, fixtureA));
+			}
+			else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody) {
+				m_fixturePairs.insert(make_pair(fixtureA, fixtureB));
+			}
+		}		
 	}
 
 	void EndContact(b2Contact* contact) {
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
 
-		if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody) {
-			m_fixturePairs.erase(make_pair(fixtureB, fixtureA));
+		b2WorldManifold waterManifold;
+		contact->GetWorldManifold(&waterManifold);
+		
+		waterManifold.normal.Normalize();
+		
+		// 부력
+		if (fixtureA->GetBody() == water || fixtureB->GetBody() == water)
+		{
+			printf("빠지긴하니?\n");
+
+			if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody)
+			{
+				m_fixtureTuples.erase(make_pair(make_pair(fixtureB, fixtureA),
+					make_pair(waterManifold.normal.x, waterManifold.normal.y)));
+			}
+			else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody)
+			{
+				m_fixtureTuples.erase(make_pair(make_pair(fixtureA, fixtureB),
+					make_pair(waterManifold.normal.x, waterManifold.normal.y)));
+			}
 		}
-		else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody) {
-			m_fixturePairs.erase(make_pair(fixtureA, fixtureB));
-		}
+		// 장애물
+		else {
+			if (fixtureA->IsSensor() && fixtureB->GetBody()->GetType() == b2_dynamicBody) {
+				m_fixturePairs.erase(make_pair(fixtureB, fixtureA));
+			}
+			else if (fixtureB->IsSensor() && fixtureA->GetBody()->GetType() == b2_dynamicBody) {
+				m_fixturePairs.erase(make_pair(fixtureA, fixtureB));
+			}
+		}		
 	}
 };
 
 
 // contact Listener 설정 - 부력 용도
 b2ContactListener_ contactListener;
-//b2ContactListener_2 water_contactListener;
 
 /* 부력 용도 여러 함수 정리 */
 bool inside(b2Vec2 cp1, b2Vec2 cp2, b2Vec2 p) {
@@ -236,27 +222,42 @@ b2Vec2 ComputeCentroid(vector<b2Vec2> vs, float& area) {
 	return c;
 }
 
-void applybuoyancy(b2Fixture* box, b2Fixture* water, float area,
-	b2Vec2 gravity, b2Vec2	centroid) {
-	float displaceMass = water->GetDensity() * area;
-	b2Vec2 buoyancyForce = displaceMass * -1 * gravity;
-	box->GetBody()->ApplyForce(buoyancyForce, centroid, true);
-}
-
-void applydrag(b2Fixture* box, b2Fixture* water, float area, b2Vec2 centroid)
+// 부력 적용
+void applybuoyancy(b2Fixture* ball, b2Fixture* water, float area,
+	b2Vec2 gravity, b2Vec2 centroid)
 {
-	b2Vec2 velDir = box->GetBody()->GetLinearVelocityFromWorldPoint(centroid) -
-		water->GetBody()->GetLinearVelocityFromWorldPoint(centroid);
-
-	float vel = velDir.Normalize();
-
-	float dragMag = water->GetDensity() * vel * vel / 2;
-	b2Vec2 dragForce = dragMag * -velDir;
-	box->GetBody()->ApplyForce(dragForce, centroid, true);
-
-	float angularDrag = area * -water->GetBody()->GetAngularVelocity();
-	box->GetBody()->ApplyTorque(angularDrag, true);
+	float displacedMass = water->GetDensity() * area;
+	b2Vec2 buoyancyForce = displacedMass * -1.0f * gravity;
+	ball->GetBody()->ApplyForce(buoyancyForce, centroid, true);
+	printf("buoyancy: %f, %f\n", buoyancyForce.x, buoyancyForce.y);
 }
+
+// 드래그 적용
+void applydrag(b2Fixture* ball, b2Fixture* water, float area, b2Vec2 centroid)
+{
+	// 오브젝트와 유체간의 상대속도
+	b2Vec2 velDir = ball->GetBody()->GetLinearVelocityFromWorldPoint(centroid)
+		- water->GetBody()->GetLinearVelocityFromWorldPoint(centroid);
+	float velsquare = velDir.LengthSquared();
+	// 속도값 오류 보정
+	if (velsquare > 50.0f)
+		velsquare = sqrt(velsquare);
+	velDir.Normalize();
+
+	// 항력계수
+	float cd = 4.0;
+
+	// 간단한 linear drag 적용
+	float dragMag = water->GetDensity() * velsquare * area * cd / 2;
+	printf("area: %f, vel: %f, dragMag: %f\n", area, velsquare, dragMag);
+	b2Vec2 dragForce = dragMag * -velDir;
+	ball->GetBody()->ApplyForce(dragForce, centroid, true);
+
+	// 간단한 angular drag 적용
+	float angularDrag = cd * area * -water->GetBody()->GetAngularVelocity();
+	ball->GetBody()->ApplyTorque(angularDrag, true);
+}
+
 
 b2Vec2 intersection(b2Vec2 cp1, b2Vec2 cp2, b2Vec2 s, b2Vec2 e) {
 	b2Vec2 dc(cp1.x - cp2.x, cp1.y - cp2.y);
@@ -267,50 +268,6 @@ b2Vec2 intersection(b2Vec2 cp1, b2Vec2 cp2, b2Vec2 s, b2Vec2 e) {
 	float n3 = 1.0 / (dc.x * dp.y - dc.y * dp.x);
 
 	return b2Vec2((n1 * dp.x - n2 * dc.x) * n3, (n1 * dp.y - n2 * dc.y) * n3);
-}
-
-bool findIntersectionOfFixtures(b2Fixture* fA, b2Fixture* fB, vector<b2Vec2>& outputVertices) {
-	if (fA->GetShape()->GetType() != b2Shape::e_polygon ||
-		fB->GetShape()->GetType() != b2Shape::e_polygon)
-		return false;
-
-	b2PolygonShape* polyA = (b2PolygonShape*)fA->GetShape();
-	b2PolygonShape* polyB = (b2PolygonShape*)fB->GetShape();
-
-	for (int i = 0; i < polyA->GetVertexCount(); i++)
-		outputVertices.push_back(fA->GetBody()->GetWorldPoint(polyA->GetVertex(i)));
-
-	vector<b2Vec2> clipPolygon;
-	for (int i = 0; i < polyA->GetVertexCount(); i++)
-		clipPolygon.push_back(fB->GetBody()->GetWorldPoint(polyB->GetVertex(i)));
-
-	b2Vec2 cp1 = clipPolygon[clipPolygon.size() - 1];
-	for (int j = 0; j < clipPolygon.size(); j++) {
-		b2Vec2 cp2 = clipPolygon[j];
-		if (outputVertices.empty())
-			return false;
-
-		vector<b2Vec2> inputList = outputVertices;
-		outputVertices.clear();
-
-		b2Vec2 s = inputList[inputList.size() - 1];
-		for (int i = 0; i < inputList.size(); i++) {
-			b2Vec2 e = inputList[i];
-
-			if (!inside(cp1, cp2, e)) {
-				if (!inside(cp1, cp2, s)) {
-					outputVertices.push_back(intersection(cp1, cp2, s, e));
-				}
-				outputVertices.push_back(e);
-			}
-			else if (inside(cp1, cp2, s)) {
-				outputVertices.push_back(intersection(cp1, cp2, s, e));
-			}
-			s = e;
-		}
-		cp1 = cp2;
-	}
-	return !outputVertices.empty();
 }
 
 /* 시각화를 위한 함수 */
@@ -771,12 +728,12 @@ void Update(int value)
 
 			// 확대 장애물인지 확인하기 위함
 			if ((fixture_one->GetBody() == obs_large) || (fixture_two->GetBody() == obs_large)) {
-				ballshape.m_radius = 2.0f;
+				ballshape.m_radius = 1.0f;
 			}
 
 			// 축소 장애물인지 확인하기 위함
 			if ((fixture_one->GetBody() == obs_small) || (fixture_two->GetBody() == obs_small)) {
-				ballshape.m_radius = 0.2f;
+				ballshape.m_radius = 0.5f;
 			}
 
 			// 색깔 변경하기 - 흰색
@@ -791,127 +748,114 @@ void Update(int value)
 				glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 				flag_ball_color = false;
 			}
-
-			// 부력 관련 코드임
-			if (findIntersectionOfFixtures(fixture_one, fixture_two, intersectionPoints)) {
-
-				float area = 10;
-				b2Vec2 centroid = ComputeCentroid(intersectionPoints, area);
-
-				printf("%f\n", area);
-
-				applybuoyancy(fixture_one, fixture_two, area, gravity, centroid);
-				applydrag(fixture_one, fixture_two, area, centroid);
-			}
-
 			++it;
 		}
 	}
 
-	//// 부력 관련 contact listner
-	//if (water_contactListener.m_fixtureTuples.size() > 0)
-	//{
-	//	set<fixtureTuple>::iterator it = water_contactListener.m_fixtureTuples.begin();
-	//	set<fixtureTuple>::iterator end = water_contactListener.m_fixtureTuples.end();
+	// 부력 관련 contact listner
+	if (contactListener.m_fixtureTuples.size() > 0)
+	{
+		set<fixtureTuple>::iterator it = contactListener.m_fixtureTuples.begin();
+		set<fixtureTuple>::iterator end = contactListener.m_fixtureTuples.end();
 
-	//	while (it != end) {
-	//		b2Fixture* fixture_A = get<0>(*it);
-	//		b2Fixture* fixture_B = get<1>(*it);
+		while (it != end) {			
+			b2Fixture* fixture_A = it->first.first;
+			b2Fixture* fixture_B = it->first.second;
 
-	//		// 부력 적용하는 경우에 해당하는지
-	//		if (fixture_B->GetBody() == water)
-	//		{
-	//			// 접촉점 노멀벡터
-	//			b2Vec2 Mani_BallnWater;
-	//			Mani_BallnWater.x = get<2>(*it);
-	//			Mani_BallnWater.y = get<3>(*it);
+			// 부력 적용하는 경우에 해당하는지
+			if (fixture_B->GetBody() == water)
+			{
+				// 접촉점 노멀벡터
+				b2Vec2 Mani_BallnWater;
+				Mani_BallnWater.x = it->second.first;
+				Mani_BallnWater.y = it->second.second;
 
-	//			// raycast input
-	//			b2RayCastInput input;
-	//			float rayLength = ballshape.m_radius; // 기준을 공 반지름만큼
+				// raycast input
+				b2RayCastInput input;
+				float rayLength = ballshape.m_radius; // 기준을 공 반지름만큼
 
-	//			input.p1 = pin_ball->GetPosition(); // 공의 중심 좌표
+				input.p1 = pin_ball->GetPosition(); // 공의 중심 좌표
 
-	//			// 공이 절반보다 덜 잠겨있는지 확인
-	//			input.p2 = input.p1 + rayLength * (-1.0f) * Mani_BallnWater;
-	//			input.maxFraction = 20.0f; // 충분히 닿을만큼
+				// 공이 절반보다 덜 잠겨있는지 확인
+				input.p2 = input.p1 + rayLength * (-1.0f) * Mani_BallnWater;
+				input.maxFraction = 20.0f; // 충분히 닿을만큼
 
-	//			b2RayCastOutput output;
+				b2RayCastOutput output;
 
-	//			// ray 교차점
-	//			b2Vec2 intersectionPoint;
-	//			// 면적, 부력 작용점 계산
+				// ray 교차점
+				b2Vec2 intersectionPoint;
+				// 면적, 부력 작용점 계산
 
-	//			float area = 0.0f;
-	//			b2Vec2 centroid;
+				float area = 0.0f;
+				b2Vec2 centroid;
 
-	//			// 부딪힐 경우
-	//			if (fixture_B->RayCast(&output, input, 0))
-	//			{
-	//				printf("Here\n");
-	//				float origin_area = pow(ballshape.m_radius, 2) * b2_pi; // 원 전체 넓이
+				// 부딪힐 경우
+				if (fixture_B->RayCast(&output, input, 0))
+				{
+					printf("Here  ");
+					float origin_area = pow(ballshape.m_radius, 2) * b2_pi; // 원 전체 넓이
 
-	//				if (output.fraction <= 1.0f)  // 절반 이하로 잠겼을 경우
-	//				{
-	//					printf("A\n");
-	//					// ray 교점
-	//					intersectionPoint = input.p1 + output.fraction * (input.p2 - input.p1);
-	//					float dist = b2Distance(intersectionPoint, input.p1);
-	//					double cos = dist / ballshape.m_radius; // cos(세타/2)
-	//					double angle = 2.0f * acos(cos); // 라디안값
-	//					// 넓이 = 부채꼴 - 삼각형
-	//					area = (pow(ballshape.m_radius, 2) * angle * 0.5f) - (pow(ballshape.m_radius, 2) * sin(angle) * 0.5f);
-	//					// 작용점 계산
-	//					centroid = input.p1 + 4.0f * pow(sin(angle * 0.5f), 3) / (3.0f * (angle - sin(angle))) * (input.p2 - input.p1);
+					if (output.fraction <= 1.0f)  // 절반 이하로 잠겼을 경우
+					{
+						printf("A  ");
+						// ray 교점
+						intersectionPoint = input.p1 + output.fraction * (input.p2 - input.p1);
+						float dist = b2Distance(intersectionPoint, input.p1);
+						double cos = dist / ballshape.m_radius; // cos(세타/2)
+						double angle = 2.0f * acos(cos); // 라디안값
+						// 넓이 = 부채꼴 - 삼각형
+						area = (pow(ballshape.m_radius, 2) * angle * 0.5f) - (pow(ballshape.m_radius, 2) * sin(angle) * 0.5f);
+						// 작용점 계산
+						centroid = input.p1 + 4.0f * pow(sin(angle * 0.5f), 3) / (3.0f * (angle - sin(angle))) * (input.p2 - input.p1);
 
-	//				}
-	//			}
-	//			// 안에 들어와있는지 점검
-	//			else
-	//			{
-	//				printf("여긴가\n");
-	//				// 안 잠겼거나, 절반 이상 잠겼을 경우
-	//				input.p1 = input.p1 + rayLength * 1.0f * Mani_BallnWater; // 노멀 따라서 원위의 점으로
-	//				input.p2 = pin_ball->GetPosition();
-	//				if (fixture_B->RayCast(&output, input, 0))
-	//				{
-	//					printf("B\n");
-	//					//절반 보다는 더 잠겼으나, 완전히 덜 잠겼을 경우
-	//					float new_fraction = 1 - output.fraction;
-	//					if (new_fraction <= 1.0f)
-	//					{
-	//						// ray 교점
-	//						intersectionPoint = input.p1 + output.fraction * (input.p2 - input.p1);
-	//						float dist = b2Distance(intersectionPoint, input.p1);
-	//						double cos = dist / ballshape.m_radius; // cos(세타/2)
-	//						double angle = 2.0f * acos(cos); // 라디안값
-	//						// 넓이 = 부채꼴 + 삼각형
-	//						area = (pow(ballshape.m_radius, 2) * (2.0f * b2_pi - angle) * 0.5f) + (pow(ballshape.m_radius, 2) * sin(angle) * 0.5f);
-	//						// 작용점 계산
-	//						centroid = input.p1 + 4.0f * pow(sin(angle * 0.5f), 3) / (3.0f * (angle - sin(angle))) * (input.p1 - input.p2);
+					}
+				}
+				// 안에 들어와있는지 점검
+				else
+				{
+					printf("여긴가  ");
+					// 안 잠겼거나, 절반 이상 잠겼을 경우
+					input.p1 = input.p1 + rayLength * 1.0f * Mani_BallnWater; // 노멀 따라서 원위의 점으로
+					input.p2 = pin_ball->GetPosition();
+					if (fixture_B->RayCast(&output, input, 0))
+					{
+						printf("B  ");
+						//절반 보다는 더 잠겼으나, 완전히 덜 잠겼을 경우
+						float new_fraction = 1 - output.fraction;
+						if (new_fraction <= 1.0f)
+						{
+							// ray 교점
+							intersectionPoint = input.p1 + output.fraction * (input.p2 - input.p1);
+							float dist = b2Distance(intersectionPoint, input.p1);
+							double cos = dist / ballshape.m_radius; // cos(세타/2)
+							double angle = 2.0f * acos(cos); // 라디안값
+							// 넓이 = 부채꼴 + 삼각형
+							area = (pow(ballshape.m_radius, 2) * (2.0f * b2_pi - angle) * 0.5f) + (pow(ballshape.m_radius, 2) * sin(angle) * 0.5f);
+							// 작용점 계산
+							centroid = input.p1 + 4.0f * pow(sin(angle * 0.5f), 3) / (3.0f * (angle - sin(angle))) * (input.p1 - input.p2);
 
-	//					}
-	//				}
-	//				// 완전히 잠겼을 경우
-	//				else
-	//				{
-	//					printf("C\n");
-	//					area = pow(ballshape.m_radius, 2) * b2_pi;
-	//					centroid = pin_ball->GetPosition();
-	//				}
-	//			}
+						}
+					}
+					// 완전히 잠겼을 경우
+					else
+					{
+						printf("C  ");
+						area = pow(ballshape.m_radius, 2) * b2_pi;
+						centroid = pin_ball->GetPosition();
+					}
+				}
 
-	//			printf("area: %f\n", area);
+				printf("area: %f\n", area);
 
-	//			// 부력적용
-	//			applybuoyancy(fixture_A, fixture_B, area, gravity, centroid);
+				// 부력적용
+				applybuoyancy(fixture_A, fixture_B, area, gravity, centroid);
 
-	//			// drag force 적용
-	//			applydrag(fixture_A, fixture_B, area, centroid);
-	//		}
-	//		++it;
-	//	}
-	//}
+				// drag force 적용
+				applydrag(fixture_A, fixture_B, area, centroid);
+			}
+			++it;
+		}
+	}
 
 
 	// 키보드 컨트롤 부분 - flipper
@@ -1164,7 +1108,7 @@ void Setup()
 	{
 		/* 기본적인 설정 부분 */
 		// step1 : define body - 위치 설정
-		b2Vec2 p1(1.0f, 2.0f), p2(5.0f, 2.0f);
+		b2Vec2 p1(0.5f, 2.0f), p2(5.5f, 2.0f);
 
 		// step2 : create body - 각 flipper별로 만들기
 		b2BodyDef bd;
@@ -1656,10 +1600,13 @@ void DoReleaseKey(unsigned char key, int x, int y) {
 	switch (key)
 	{
 	case 'q':
-		pin_ball->ApplyForce(b2Vec2(-x_force, y_force), pin_ball->GetWorldCenter(), true);
+		pin_ball->ApplyForce(b2Vec2(-20000, 20000), pin_ball->GetWorldCenter(), true);
+		break;						 		
+	case 'e':						 		
+		pin_ball->ApplyForce(b2Vec2(20000, -20000), pin_ball->GetWorldCenter(), true);
 		break;
-	case 'e':
-		pin_ball->ApplyForce(b2Vec2(x_force, -y_force), pin_ball->GetWorldCenter(), true);
+	case 'w':
+		pin_ball->ApplyForce(b2Vec2(0, 100), pin_ball->GetWorldCenter(), true);
 		break;
 	case 'a':
 		flag_flip = false;
@@ -1720,3 +1667,48 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+
+
+//bool findIntersectionOfFixtures(b2Fixture* fA, b2Fixture* fB, vector<b2Vec2>& outputVertices) {
+//	if (fA->GetShape()->GetType() != b2Shape::e_polygon ||
+//		fB->GetShape()->GetType() != b2Shape::e_polygon)
+//		return false;
+//
+//	b2PolygonShape* polyA = (b2PolygonShape*)fA->GetShape();
+//	b2PolygonShape* polyB = (b2PolygonShape*)fB->GetShape();
+//
+//	for (int i = 0; i < polyA->GetVertexCount(); i++)
+//		outputVertices.push_back(fA->GetBody()->GetWorldPoint(polyA->GetVertex(i)));
+//
+//	vector<b2Vec2> clipPolygon;
+//	for (int i = 0; i < polyA->GetVertexCount(); i++)
+//		clipPolygon.push_back(fB->GetBody()->GetWorldPoint(polyB->GetVertex(i)));
+//
+//	b2Vec2 cp1 = clipPolygon[clipPolygon.size() - 1];
+//	for (int j = 0; j < clipPolygon.size(); j++) {
+//		b2Vec2 cp2 = clipPolygon[j];
+//		if (outputVertices.empty())
+//			return false;
+//
+//		vector<b2Vec2> inputList = outputVertices;
+//		outputVertices.clear();
+//
+//		b2Vec2 s = inputList[inputList.size() - 1];
+//		for (int i = 0; i < inputList.size(); i++) {
+//			b2Vec2 e = inputList[i];
+//
+//			if (!inside(cp1, cp2, e)) {
+//				if (!inside(cp1, cp2, s)) {
+//					outputVertices.push_back(intersection(cp1, cp2, s, e));
+//				}
+//				outputVertices.push_back(e);
+//			}
+//			else if (inside(cp1, cp2, s)) {
+//				outputVertices.push_back(intersection(cp1, cp2, s, e));
+//			}
+//			s = e;
+//		}
+//		cp1 = cp2;
+//	}
+//	return !outputVertices.empty();
+//}

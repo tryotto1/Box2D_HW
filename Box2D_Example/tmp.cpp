@@ -3,9 +3,8 @@
 //#include "Box2D/Box2D.h"
 //#include <math.h>
 //#include <set>
-//#include <tuple>
 //#include <vector>
-//
+//#include <tuple>
 //
 //#define NAIL_NUM 19
 //
@@ -79,7 +78,11 @@
 //            {
 //                m_fixtureTuples.insert(make_tuple(fixtureA, fixtureB,
 //                    waterManifold.normal.x, waterManifold.normal.y));
+//
 //            }
+//            //printf("%f, %f\n", waterManifold.normal.x, waterManifold.normal.y);
+//            /*printf("%f, %f\n", get<2>(*m_fixtureTuples.begin()),
+//               get<3>(*m_fixtureTuples.begin()));*/
 //        }
 //
 //    }
@@ -253,6 +256,25 @@
 //    glEnd();
 //    glPopMatrix();
 //
+//    //// get position and angle by body(box)
+//    //position = box->GetPosition();
+//    //angle = box->GetAngle();
+//
+//    //glMatrixMode(GL_MODELVIEW);
+//    //glPushMatrix();
+//    //glTranslatef(position.x, position.y, 0.0f);// Translation
+//    //glRotatef(angle, 0.0f, 0.0f, 1.0f);         // Rotation
+//    //glColor3f(0.9f, 0.2f, 0.4f);            // Set color
+//
+//  //  //Draw the polygon shape with 4 vertices
+//    //glBegin(GL_QUADS);
+//    //for (int i = 0; i < 4; i++) {
+//    //   glVertex2f(boxshape.m_vertices[i].x, boxshape.m_vertices[i].y);
+//    //}
+//    //glEnd();
+//    //glPopMatrix();
+//
+//
 //    // 원 그리기
 //    position = ball->GetPosition();
 //    angle = ball->GetAngle();
@@ -392,8 +414,11 @@
 //        set<fixtureTuple>::iterator it = Mylistener.m_fixtureTuples.begin();
 //        set<fixtureTuple>::iterator end = Mylistener.m_fixtureTuples.end();
 //
+//        //printf("%f, %f\n", get<2>(*it)->normal.x, get<2>(*it)->normal.y);
+//        //printf("%f, %f\n", get<2>(*Mylistener.m_fixtureTuples.begin())->normal.x,
+//     //get<2>(*Mylistener.m_fixtureTuples.begin())->normal.y);
 //        while (it != end) {
-//            b2Fixture* fixture_A = get<0>(*it);            
+//            b2Fixture* fixture_A = get<0>(*it);
 //            b2Fixture* fixture_B = get<1>(*it);
 //            // 부력 적용하는 경우에 해당하는지
 //            if (fixture_B->GetBody() == water)
